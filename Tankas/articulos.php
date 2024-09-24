@@ -14,15 +14,41 @@ $result = $conn->query($sql);
 // Obtener familias
 $sql_familias = "SELECT id, nombre FROM familia";
 $result_familias = $conn->query($sql_familias);
+// Obtener el mensaje de la sesión si existe
+$message = isset($_SESSION['message']) ? $_SESSION['message'] : '';
+$message_type = isset($_SESSION['message_type']) ? $_SESSION['message_type'] : '';
+
+// Limpiar el mensaje de la sesión
+unset($_SESSION['message']);
+unset($_SESSION['message_type']);
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artículos</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <title>Tanka's</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free Website Template" name="keywords">
+    <meta content="Free Website Template" name="description">
+
+    <!-- Favicon -->
+    <link href="img/logoTankas.png" rel="icon">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/style.min.css" rel="stylesheet">
+    <!-- Alertify -->
+    <link href="https://cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/css/alertify.min.css" rel="stylesheet"/>
 </head>
 <body>
     <!-- Barra de navegación -->
@@ -45,7 +71,7 @@ $result_familias = $conn->query($sql_familias);
             </ul>
         </div>
     </nav>
-
+    <span class="alertas" id="alertas"></span>
     <div class="container mt-5">
         <h1>Gestión de Artículos</h1>
         <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#añadirArticuloModal">Añadir Nuevo Artículo</button>
@@ -187,12 +213,23 @@ $result_familias = $conn->query($sql_familias);
         </div>
     </div>
 </div>
+<div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="toast-header">
+    <img src="..." class="rounded me-2" alt="...">
+    <strong class="me-auto">Error</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+  <div class="toast-body">
+    No ha sido posible realizar la acción.
+  </div>
+</div>
 
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/alertify.min.js"></script>
     <script>
     $('#editarArticuloModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); 
@@ -217,6 +254,17 @@ $result_familias = $conn->query($sql_familias);
                 });
             });
         });
+       // Mostrar el mensaje si existe
+    var message = "<?php echo $message; ?>";
+    var messageType = "<?php echo $message_type; ?>";
+
+    if (message) {
+        if (messageType === 'success') {
+            alertify.success(message);
+        } else if (messageType === 'error') {
+            alertify.error(message);
+        }
+    }
     </script>
 
 </body>

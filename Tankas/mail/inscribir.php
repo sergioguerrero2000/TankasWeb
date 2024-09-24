@@ -1,5 +1,5 @@
 <?php
-require_once 'C:\xampp\htdocs\Tankas\Tankas\conexionBD\conexion.php';
+require_once '../conexionBD/conexion.php';
     
     $email = $_POST['email'];
     // Destinatario del correo electrónico

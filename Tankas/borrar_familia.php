@@ -18,8 +18,10 @@ if (isset($_GET['id'])) {
 
     if ($stmt->execute()) {
         $_SESSION['message'] = "Familia eliminada con éxito.";
+        $_SESSION['message_type'] = "success";
     } else {
         $_SESSION['message'] = "Error al eliminar la familia.";
+        $_SESSION['message_type'] = "error";
     }
 
     $stmt->close();
@@ -28,6 +30,7 @@ if (isset($_GET['id'])) {
     header("Location: familia.php");
 } else {
     $_SESSION['message'] = "ID de artículo no válido.";
+    $_SESSION['message_type'] = "error";
     header("Location: articulos.php");
 }
 ?>

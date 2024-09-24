@@ -1,8 +1,15 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location: login.html");
+    exit();
+}
+
 require_once 'conexionBD/conexion.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $titulo = $_POST['nombre'];
+    $titulo = $_POST['titulo'];
     $descripcion = $_POST['descripcion'];
 
     $target_dir = "img/";
@@ -18,21 +25,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->bind_param("sss", $titulo, $descripcion, $_FILES["imagen"]["name"]);
 
             if ($stmt->execute()) {
+                $_SESSION['message'] = "Novedad añadida con éxito.";
+                $_SESSION['message_type'] = "success";
                 header("Location: novedades.php");
-                exit();
             } else {
-                echo "Error: " . $stmt->error;
+                $_SESSION['message'] = "Error al añadir.";
+                $_SESSION['message_type'] = "error";
+                header("Location: novedades.php");
             }
-
             $stmt->close();
             $conn->close();
         } else {
-            echo "Hubo un error subiendo la imagen.";
+            $_SESSION['message'] = "Error añadir la imagen.";
+            $_SESSION['message_type'] = "error";
+            header("Location: novedades.php");
+            exit();
         }
     } else {
-        echo "El archivo no es una imagen.";
+        $_SESSION['message'] = "El archivo no es una imagen.";
+        $_SESSION['message_type'] = "error";
+        header("Location: novedades.php");
+        exit();
     }
 } else {
+    $_SESSION['message'] = "Novedad añadida con éxito.";
+    $_SESSION['message_type'] = "success";
     header("Location: novedades.php");
     exit();
 }

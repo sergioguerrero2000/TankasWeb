@@ -3,10 +3,11 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Tanka's</title>
+    <title>Tanka's - La boutique del cafe</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free Website Template" name="keywords">
-    <meta content="Free Website Template" name="description">
+    <meta content="Tanka´s la boutique del cafe" name="keywords">
+    <meta content="Cafeteria en huelva, dedicada a la elaboracion de exquisitos cafes y tostadas saludables." name="description">
+
 
     <!-- Favicon -->
     <link href="img/logoTankas.png" rel="icon">
@@ -24,6 +25,25 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.min.css" rel="stylesheet">
+    <!-- Alertify -->
+    <link href="https://cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/css/alertify.min.css" rel="stylesheet"/>
+    <!--Datatimepicker-->
+            <!-- CSS del plugin datetimepicker (ejemplo para Bootstrap) -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css">
+
+        <!-- jQuery (necesario para Bootstrap) -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <!-- Moment.js (necesario para Bootstrap datetimepicker) -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/es.js"></script> <!-- idioma español -->
+
+        <!-- JavaScript del plugin datetimepicker -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+    <style>
+        .datetimepicker { z-index: 1151 !important; }
+    </style>
 </head>
 
 
@@ -32,21 +52,18 @@
     <div class="container-fluid p-0 nav-bar">
         <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
             <a href="index.html" class="navbar-brand px-lg-4 m-0">
-                <h1 class="m-0 display-4 text-uppercase text-white">Tanka´s</h1>
+                <h1 class="m-0 display-4 text-uppercase text-white">TANKA' S</h1>
             </a>
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                    <div class="navbar-nav ml-auto p-4">
-                        <a href="index.html" class="nav-item nav-link ">Inicio</a>
-                        <a href="about.html" class="nav-item nav-link">Sobre nosotros</a>
-                        <a href="service.html" class="nav-item nav-link">Galeria</a>
-                        <a href="menu.html" class="nav-item nav-link">Menu</a>
-                        <a href="reservation.html" class="nav-item nav-link active">Reservas</a>
-                        <a href="contact.html" class="nav-item nav-link ">Contacto</a>
-                    </div>
+                <div class="navbar-nav ml-auto p-4">
+                    <a href="index.html" class="nav-item nav-link">Inicio</a>
+                    <a href="about.html" class="nav-item nav-link">Sobre nosotros</a>
+                    <a href="menu.html" class="nav-item nav-link">Menu</a>
+                    <a href="reservation.html" class="nav-item nav-link active">Reservas</a>
+                    <a href="contact.html" class="nav-item nav-link">Contacto</a>
                 </div>
             </div>
         </nav>
@@ -62,7 +79,6 @@
         </div>
     </div>
     <!-- Page Header End -->
-
     <div class="container-fluid my-5">
         <div class="container">
             <div class="reservation position-relative overlay-top overlay-bottom">
@@ -81,13 +97,16 @@
                     <div class="col-lg-6">
                         <div class="text-center p-5" style="background: rgba(51, 33, 29, .8);">
                             <h1 class="text-white mb-4 mt-5">Reserva tu mesa</h1>
-                            <form class="mb-5" action="process_reservation.php" method="POST" enctype="multipart/form-data">
+                            <form class="mb-5" action="reservas/reservas.php" method="POST" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <input type="text" name="name" class="form-control bg-transparent border-primary p-4" placeholder="Nombre" required="required" />
                                 </div>
                                 <div class="form-group">
                                     <input type="email" name="email" class="form-control bg-transparent border-primary p-4" placeholder="Correo" required="required" />
                                 </div>
+                                <div class="form-group">
+                                    <input type="text" name="phone" class="form-control bg-transparent border-primary p-4" placeholder="Teléfono" required="required" />
+                                </div>                                
                                 <div class="form-group">
                                     <div class="date" id="date" data-target-input="nearest">
                                         <input type="text" name="date" class="form-control bg-transparent border-primary p-4 datetimepicker-input" placeholder="Fecha" data-target="#date" data-toggle="datetimepicker" />
@@ -119,10 +138,12 @@
                                     <select name="cake" class="custom-select bg-transparent border-primary px-4" style="height: 49px;">
                                         <option selected>Elige tu tarta</option>
                                         <option value="chocolate">Tarta de Chocolate</option>
-                                        <option value="vainilla">Tarta de Vainilla</option>
-                                        <option value="fresa">Tarta de Fresa</option>
-                                        <option value="limon">Tarta de Limón</option>
+                                        <option value="vainilla">Tarta de Queso</option>
+                                        <option value="fresa">Tarta de Kinder</option>
+                                        <option value="limon">Tarta de Ferrero</option>
                                         <option value="zanahoria">Tarta de Zanahoria</option>
+                                        <option value="redVelvet">Tarta Red Velvet</option>
+                                        <option value="chocolateblanco">Tarta de Chocolate Blanco</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -138,10 +159,57 @@
             </div>
         </div>
     </div>
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <img src="..." class="rounded me-2" alt="...">
+          <strong class="me-auto">Error</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+          No ha sido posible realizar la acción.
+        </div>
+      </div>
+    <script>
+    $(document).ready(function() {
+
+        $('#date').datetimepicker({
+            format: 'Y-m-d',
+            timepicker: false
+        });
     
+        $('#time').datetimepicker({
+            format: 'H:i',
+            datepicker: false
+        });
+        // Mostrar el mensaje si existe
+        const urlParams = new URLSearchParams(window.location.search);
+        const message = urlParams.get('mensaje');
+        const messageType = urlParams.get('mensaje_tipo');
+
+        if (message) {
+            var toastBody = document.querySelector('#liveToast .toast-body');
+            toastBody.textContent = message;
+
+            var toast = new bootstrap.Toast(document.getElementById('liveToast'));
+
+            if (messageType === 'success') {
+                toastBody.parentNode.classList.remove('bg-danger');
+                toastBody.parentNode.classList.add('bg-success');
+                alertify.success(message);
+            } else if (messageType === 'error') {
+                toastBody.parentNode.classList.remove('bg-success');
+                toastBody.parentNode.classList.add('bg-danger');
+                alertify.error(message);
+            }
+            
+            toast.show();
+        }
+    });
+
+    </script>
     <!-- Reservation End -->
 
-
+    
 
     <!-- Footer Start -->
     <div class="container-fluid footer text-white mt-5 pt-5 px-0 position-relative overlay-top">
@@ -204,6 +272,7 @@
     <script src="lib/tempusdominus/js/moment.min.js"></script>
     <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/alertify.min.js"></script>
 
     <!-- Contact Javascript File -->
     <script src="mail/jqBootstrapValidation.min.js"></script>

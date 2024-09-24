@@ -10,6 +10,13 @@ require_once 'conexionBD/conexion.php';
 
 $sql = "SELECT id, nombre FROM familia";
 $result = $conn->query($sql);
+// Obtener el mensaje de la sesión si existe
+$message = isset($_SESSION['message']) ? $_SESSION['message'] : '';
+$message_type = isset($_SESSION['message_type']) ? $_SESSION['message_type'] : '';
+
+// Limpiar el mensaje de la sesión
+unset($_SESSION['message']);
+unset($_SESSION['message_type']);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -17,8 +24,28 @@ $result = $conn->query($sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artículos</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free Website Template" name="keywords">
+    <meta content="Free Website Template" name="description">
+
+    <!-- Favicon -->
+    <link href="img/logoTankas.png" rel="icon">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/style.min.css" rel="stylesheet">
+    <!-- Alertify -->
+    <link href="https://cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/css/alertify.min.css" rel="stylesheet"/>
 </head>
 <body>
     <!-- Barra de navegación -->
@@ -43,7 +70,7 @@ $result = $conn->query($sql);
     </nav>
 
     <div class="container mt-5">
-        <h1>Gestión de Artículos</h1>
+        <h1>Gestión de Familias</h1>
         <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#añadirFamiliaModal">Añadir Nuevo Familia</button>
         <div class="table-responsive">
             <table class="table table-bordered">
@@ -135,6 +162,7 @@ $result = $conn->query($sql);
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/alertify.min.js"></script>
     <script>
     $('#editarFamiliaModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); 
@@ -145,6 +173,17 @@ $result = $conn->query($sql);
         modal.find('#editar-id').val(id);
         modal.find('#editar-nombre').val(nombre);
     });
+    // Mostrar el mensaje si existe
+    var message = "<?php echo $message; ?>";
+    var messageType = "<?php echo $message_type; ?>";
+
+    if (message) {
+        if (messageType === 'success') {
+            alertify.success(message);
+        } else if (messageType === 'error') {
+            alertify.error(message);
+        }
+    }
     </script>
 
 </body>

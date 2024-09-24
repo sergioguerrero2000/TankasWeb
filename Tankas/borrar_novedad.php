@@ -18,16 +18,21 @@ if (isset($_GET['id'])) {
 
     if ($stmt->execute()) {
         $_SESSION['message'] = "Novedad eliminada con éxito.";
+        $_SESSION['message_type'] = "success";
+        
     } else {
         $_SESSION['message'] = "Error al eliminar la novedad.";
+        $_SESSION['message_type'] = "error";
     }
 
     $stmt->close();
     $conn->close();
-
+    $_SESSION['message'] = "Novedad eliminada con éxito.";
+    $_SESSION['message_type'] = "success";
     header("Location: novedades.php");
 } else {
     $_SESSION['message'] = "ID de artículo no válido.";
-    header("Location: articulos.php");
+    $_SESSION['message_type'] = "error";
+    header("Location: novedades.php");
 }
 ?>

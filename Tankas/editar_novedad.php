@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location: login.html");
+    exit();
+}
+
 require_once 'conexionBD/conexion.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -20,18 +27,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt->bind_param("sssi", $titulo, $descripcion, $_FILES["imagen"]["name"], $id);
 
                 if ($stmt->execute()) {
+                    $_SESSION['message'] = "Novedad editada con éxito.";
+                    $_SESSION['message_type'] = "success";
                     header("Location: novedades.php");
-                    exit();
                 } else {
-                    echo "Error: " . $stmt->error;
+                    $_SESSION['message'] = "Error al editar.";
+                    $_SESSION['message_type'] = "error";
+                    header('Location: novedades.php');
                 }
 
                 $stmt->close();
             } else {
-                echo "Hubo un error subiendo la imagen.";
+                $_SESSION['message'] = "Error en la imagen.";
+                $_SESSION['message_type'] = "error";
+                header('Location: novedades.php');
             }
         } else {
-            echo "El archivo no es una imagen.";
+            $_SESSION['message'] = "El archivo no es una imagen.";
+            $_SESSION['message_type'] = "error";
+            header('Location: novedades.php');
         }
     } else {
         $sql = "UPDATE novedades SET titulo=?, descripcion=? WHERE id=?";
@@ -39,10 +53,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_param("ssi", $titulo, $descripcion, $id);
 
         if ($stmt->execute()) {
-            header("Location: novedades.php");
+            $_SESSION['message'] = "Novedad editada con éxito.";
+            $_SESSION['message_type'] = "success";
+            header('Location: novedades.php');
             exit();
         } else {
-            echo "Error: " . $stmt->error;
+            $_SESSION['message'] = "El archivo no es una imagen.";
+            $_SESSION['message_type'] = "error";
+            header('Location: novedades.php');
+            exit();
         }
 
         $stmt->close();
@@ -50,7 +69,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $conn->close();
 } else {
-    header("Location: novedades.php");
+    $_SESSION['message'] = "Novedad editada con éxito.";
+    $_SESSION['message_type'] = "success";
+    header('Location: novedades.php');
     exit();
 }
 ?>

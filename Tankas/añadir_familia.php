@@ -18,10 +18,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bind_param("s", $nombre);
 
         if ($stmt->execute()) {
+            $_SESSION['message'] = "Familia añadida con éxito.";
+            $_SESSION['message_type'] = "success";
             header("Location: familia.php");
             exit();
         } else {
-            echo "Error: " . $stmt->error;
+            $_SESSION['message'] = "Error al añadir.";
+            $_SESSION['message_type'] = "error";
+            header("Location: familia.php");
         }
 
         $stmt->close();

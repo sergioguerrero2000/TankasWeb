@@ -20,10 +20,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bind_param("ssss", $nombre, $precio, $disponible, $familia);
 
         if ($stmt->execute()) {
+            $_SESSION['message'] = "Artículo añadido con éxito.";
+            $_SESSION['message_type'] = "success";
             header("Location: articulos.php");
             exit();
         } else {
-            echo "Error: " . $stmt->error;
+            $_SESSION['message'] = "Error al añadir.";
+            $_SESSION['message_type'] = "error";
+            header("Location: articulos.php");
         }
 
         $stmt->close();

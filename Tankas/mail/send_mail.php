@@ -12,10 +12,10 @@ $mail = new PHPMailer(true);
 try {
     //Configuración del servidor SMTP
     $mail->isSMTP();
-    $mail->Host       = 'smtp.example.com'; // Coloca aquí el servidor SMTP
+    $mail->Host       = 'smtp.gmail.com'; // Coloca aquí el servidor SMTP
     $mail->SMTPAuth   = true;
-    $mail->Username   = 'tu_email@example.com'; // Coloca aquí tu dirección de correo electrónico
-    $mail->Password   = 'tu_contraseña'; // Coloca aquí tu contraseña
+    $mail->Username   = 'sergioguevi10@gmail.com'; // Coloca aquí tu dirección de correo electrónico
+    $mail->Password   = 'Messi2011'; // Coloca aquí tu contraseña
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port       = 587; // Puedes cambiar el puerto SMTP si es necesario
 

@@ -55,17 +55,25 @@
     <div class="login-container">
         <img src="img/logoTankas.png" alt="Logo de la Empresa">
         <h2>Login Administrador</h2>
+        <span id="error" name="error" style="color: red;"></span>
+
         <form id="loginForm" action="login/login.php" method="POST">
             <input type="text" name="username" placeholder="Nombre de usuario" required>
             <input type="password" name="password" placeholder="Contraseña" required>
             <button type="submit">Iniciar sesión</button>
         </form>
     </div>
-
+    <script>
+        const urlParam = new URLSearchParams(window.location.search);
+        if(urlParam.get("error") == 1){
+            document.getElementById('error').innerHTML = 'Los datos son incorrectos';
+        }
+    </script>
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
 

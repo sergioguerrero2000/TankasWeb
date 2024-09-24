@@ -54,6 +54,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <li class="nav-item">
                     <a class="nav-link" href="novedades.php">Novedades</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="curriculum.php">Curriculum</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="login/logout.php">
+                        <img src="img/logout.png" alt="Salir" style="height: 30px; width: 30px;">
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>

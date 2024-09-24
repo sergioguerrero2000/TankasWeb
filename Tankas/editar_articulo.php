@@ -21,10 +21,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bind_param("ssssi", $nombre, $precio, $disponible, $familia, $id);
 
         if ($stmt->execute()) {
+            $_SESSION['message'] = "Artículo editado con éxito.";
+            $_SESSION['message_type'] = "success";
             header("Location: articulos.php");
             exit();
         } else {
-            echo "Error: " . $stmt->error;
+            $_SESSION['message'] = "Error al editar.";
+            $_SESSION['message_type'] = "error";
+            header("Location: articulos.php");
+            exit();
         }
 
         $stmt->close();

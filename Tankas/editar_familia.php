@@ -18,10 +18,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bind_param("si", $nombre, $id);
 
         if ($stmt->execute()) {
-            header("Location: familia.php");
+            $_SESSION['message'] = "Familia editada con éxito.";
+            $_SESSION['message_type'] = "success";
+            header('Location: familia.php');
             exit();
         } else {
-            echo "Error: " . $stmt->error;
+            $_SESSION['message'] = "Error al editar.";
+            $_SESSION['message_type'] = "error";
+            header('Location: familia.php');
+            exit();
         }
 
         $stmt->close();

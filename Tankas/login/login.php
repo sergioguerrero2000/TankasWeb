@@ -30,10 +30,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             header("Location: ../admin.php");
             exit();
         } else {
-            echo 'Contraseña incorrecta.';
+            header("Location: ../login.html?error=1");
         }
     } else {
-        echo 'Usuario no encontrado.';
+        header("Location: ../login.html?error=1");
     }
 
     $stmt->close();

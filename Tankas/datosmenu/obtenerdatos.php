@@ -3,7 +3,7 @@
 require_once '../conexionBD/conexion.php';
 
 // Obtener datos de la tabla Familia
-$sql = "SELECT * FROM Familia";
+$sql = "SELECT * FROM familia";
 $result = $conn->query($sql);
 
 $familias = array();
@@ -15,7 +15,7 @@ if ($result->num_rows > 0) {
 
 // Obtener datos de la tabla Articulos para cada familia
 foreach ($familias as &$familia) {
-    $sql = "SELECT * FROM Articulos WHERE id_familia = ?";
+    $sql = "SELECT * FROM articulos WHERE id_familia = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $familia['id']);
     $stmt->execute();
